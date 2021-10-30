@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web</title>
+    <!-- <script src="javascript/main_page_preprocess.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,200&family=Roboto:ital,wght@0,500;0,900;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mainpage.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" ></script>
+</head>
+<body>
+<div class="wrap col-s-12 col-6">
+    <div class="menubar">
+        <div class="menubar__feature">
+            <i class="fas fa-home fa-2x menubar__feature--icon"></i>
+            <span class="menubar__feature--text">HOME</span>
+        </div>
+        <div class="menubar__feature">
+            <i class="fas fa-clock fa-2x menubar__feature--icon"></i>
+            <span class="menubar__feature--text">TIMER</span>
+        </div>
+        <div class="menubar__feature">
+            <i class="fas fa-plus-circle fa-2x menubar__feature--icon"></i>
+            <span class="menubar__feature--text">ADD DEVICE</span>
+        </div>
+        <div class="menubar__feature">
+            <div class="menubar__feature--createdIcon">
+                <Span class="menubar__feature--createdIcon--text">OTA</Span>
+            </div>
+            <span class="menubar__feature--text">UPDATE</span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__navigation">
+            <div class="content__navigation--bar">
+                <div class="content__navigation--group"><Span class="content__navigation--group--kind">All</Span></div>
+                <div class="content__navigation--group"><Span class="content__navigation--group--kind">Device</Span></div>
+                <div class="content__navigation--group"><Span class="content__navigation--group--kind">Group</Span></div>
+            </div>
+            <button class="content__navigation--sorting">Sort by name</button>
+        </div>
+        <div class="content__displayFrame" id="content__displayFrame">
+            <div class="content__displayFrame--tabs"></div>
+            <div class="content__displayFrame--tabs"></div>
+            <div class="content__displayFrame--tabs"></div>
+            <div class="content__displayFrame--control">
+                <button class="content__displayFrame--control--all">OFF</button>
+                <button class="content__displayFrame--control--edit">edit</button>
+            </div>
+        </div>
+    </div>
+     <div class="timer"> 
+        <div class="timer__selected">
+            <label for="timer__selected__Switch">Select Switch:</label>
+            <select name="timer__selected__Switch" id="" class="timer__selected__Switch">
+                <option value="">--Please choose an switch--</option>
+            </select>
+            <div class="timer__selected__device">
+                <label for="" class="timer__selected__device__label">Select Device:  </label>
+                <!-- <select name="timer__selected__device__select" id="" class="timer__selected__device__select">
+                    <option value="">--Please choose an device--</option>
+                </select> -->
+            </div>
+        </div>
+        <div class="timer__display">
+            <!-- <div class="alarm">
+                <div class="alarm__time">
+                    <input type="time" value="07:00" class="alarm__time__text alarm__time__hour">
+                    <div class="alarm__time__desc ">
+        
+                        <Span class="">ON</Span>
+                        <Span class="">Customize</Span>
+                    </div>
+                    
+                    <div class="alarm__time--clickEvent"></div>
+                    <span class="alarm__time__plusicon"></span>
+                    <span class="alarm__time__minusicon"></span>
+                </div>
+                <p class="alarm__devision"><span class="alarm__devision__text">State</span></p>
+                <div class="alarm__mode">
+                    <span class="alarm__mode__state alarm__mode__hover">ON</span>
+                    <span class="alarm__mode__state alarm__mode__state__adjust alarm__mode__hover">OFF</span>
+                    <p class="alarm__devision"><span class="alarm__devision__text">Repeat</span></p>
+                    <span class="alarm__mode__repeat alarm__mode__hover">Once</span>
+                    <span class="alarm__mode__repeat alarm__mode__hover">Daily</span>
+                    <span class="alarm__mode__repeat alarm__mode__hover">Customize</span>
+                    <br>
+                    <div class="alarm__mode__weekday">
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input8">
+                        <label for="alarm__mode__weekday__input8" class="alarm__mode__weekday__label ">sun</label>
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input9">
+                        <label for="alarm__mode__weekday__input9" class="alarm__mode__weekday__label ">mon</label>
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input10">
+                        <label for="alarm__mode__weekday__input10" class="alarm__mode__weekday__label ">tue</label>
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input11">
+                        <label for="alarm__mode__weekday__input11" class="alarm__mode__weekday__label ">wed</label>
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input12">
+                        <label for="alarm__mode__weekday__input12" class="alarm__mode__weekday__label ">thu</label>
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input13">
+                        <label for="alarm__mode__weekday__input13" class="alarm__mode__weekday__label ">fri</label>
+                        <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input14">
+                        <label for="alarm__mode__weekday__input14" class="alarm__mode__weekday__label ">sat</label>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="timer__create">
+            <div class="timer__create__btn">
+                <i class="fas fa-plus-circle fa-2x menubar__feature--icon"></i>
+            </div>
+            <div class="timer__areaCreate "> 
+                <div class="alarm">
+                    <div class="alarm__time">
+                        <input type="time" value="07:30:00"  class="alarm__time__text alarm__time__hour">
+                    </div>
+                    <p class="alarm__devision"><span class="alarm__devision__text">State</span></p>
+                    <div class="alarm__mode">
+                        <span class="alarm__mode__state alarm__mode__hover">ON</span>
+                        <span class="alarm__mode__state alarm__mode__state__adjust alarm__mode__hover">OFF</span>
+                        <p class="alarm__devision"><span class="alarm__devision__text">Repeat</span></p>
+                        <span class="alarm__mode__repeat alarm__mode__hover">Once</span>
+                        <span class="alarm__mode__repeat alarm__mode__hover">Daily</span>
+                        <span class="alarm__mode__repeat alarm__mode__hover">Customize</span>
+                        <br>
+                        
+                        <div class="alarm__mode__weekday">
+                            <input type="checkbox" class="alarm__mode__weekday__input borderAnimation" id="alarm__mode__weekday__input">
+                            <label for="alarm__mode__weekday__input" class="alarm__mode__weekday__label ">sun</label>
+                            <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input2">
+                            <label for="alarm__mode__weekday__input2" class="alarm__mode__weekday__label ">mon</label>
+                            <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input3">
+                            <label for="alarm__mode__weekday__input3" class="alarm__mode__weekday__label ">tue</label>
+                            <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input4">
+                            <label for="alarm__mode__weekday__input4" class="alarm__mode__weekday__label ">wed</label>
+                            <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input5">
+                            <label for="alarm__mode__weekday__input5" class="alarm__mode__weekday__label ">thu</label>
+                            <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input6">
+                            <label for="alarm__mode__weekday__input6" class="alarm__mode__weekday__label ">fri</label>
+                            <input type="checkbox" class="alarm__mode__weekday__input" id="alarm__mode__weekday__input7">
+                            <label for="alarm__mode__weekday__input7" class="alarm__mode__weekday__label ">sat</label>
+                        </div>
+                    </div>
+                    <div class="alarm__btn">
+                        <button class="alarm__btn__save">Save</button>
+                        <button class="alarm__btn__cancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+    <div class="addDevice"></div>
+    <div class="OTA">
+        <div class="OTA__control">
+            <button class="OTA__control__request OTA__control__button">Request</button>
+            <a href="#" class="OTA__control--a"><button class="OTA__control__access OTA__control__button">
+                <span>Start</span> 
+            </button></a>
+            <button class="OTA__control__cancel OTA__control__button">cancel</button>
+        </div>
+        <div class="OTA__select">
+            <select name="OTA__select__device"  class="OTA__select__device">
+                <option value="">--Please choose an option--</option>
+            </select>
+        </div>
+        <iframe src="javascript:void(0)" frameborder="0" class="OTA__iframe"></iframe>
+    </div>
+</div>
+    <script src="javascript/main_page.js"></script>
+</body>
+</html>

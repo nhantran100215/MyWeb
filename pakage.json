@@ -1,0 +1,15 @@
+{
+    "name":"MyWeb",
+    "version":"1.0.0",
+    "main":"main_page.js",
+    "scripts":{
+        "deploy":"gh-pages"
+    },
+    "keyword":[],
+    "author":"",
+    "lisence":"ISC",
+    "homepage":"https://nhantran100215.github.io/MyWeb/",
+    "dependencies":{
+        "gh_pages":"^1.2.0"
+    }
+}
